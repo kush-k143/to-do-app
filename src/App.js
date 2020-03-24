@@ -25,9 +25,16 @@ export default class App extends Component {
     id : uuid(),
     item : "",
     editItem : false,
-    filterText : 'hello'
+    SearchNote : ''
   }
 }
+
+  handleInput = (e) => {
+    console.log(e.target.value)
+    this.setState({
+        SearchNote : e.target.value
+    })
+  }
 
   handleChange = (e) => {
   
@@ -84,30 +91,27 @@ export default class App extends Component {
   }
 
 
-  filterUpdate(value) {
-    this.setState({
-       filterText : value
-    })
-  }
   
   render() {
     
-    console.log("filtertext component" , this.props.filterText)
+    let filteredItems = this.state.items.filter((item) => {
+      return item.title.toLowerCase().includes(this.state.SearchNote.toLowerCase())
+    })
     return (
       <div className="container">
         <div className="row">
           <div className="
           col-10 mx-auto col-md-8 mt-4">
            
-            <Search filterText = {this.state.filterText}
-            filterUpdate={this.filterUpdate.bind(this)}/>
+            <Search 
+              handleInput = {this.handleInput}/>
            
             <TodoList items={this.state.items} 
             data = {this.props.data}
             clearList={this.clearList}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}
-            filterText ={this.state.filterText} />
+            filteredItems = {filteredItems}/>
            
             <h3 className="text-capitalize text-center">
               todo input
