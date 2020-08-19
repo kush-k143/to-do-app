@@ -6,28 +6,27 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import uuid from 'uuid'
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [{
-        id : 0,
-        title : 'wake up early in the morning',
+ 
+    state = {
+               items: [{
+                   id : 0,
+                   title : 'wake up early in the morning',
         
-    } , {
-        id : 1,
-        title : 'go to saloon',
+                      } , {
+                   id : 1,
+                   title : 'go to saloon',
         
-    } , {
-        id : 2,
-        title : 'wash your hands',
+                      } , {
+                   id : 2,
+                   title : 'wash your hands',
        
-    }],
-    id : uuid(),
-    item : "",
-    editItem : false,
-    SearchNote : ''
-  }
-}
+                      }],
+               id : uuid(),
+               item : "",
+               editItem : false,
+               SearchNote : ''
+             }
+
 
   handleInput = (e) => {
     console.log(e.target.value)
@@ -67,12 +66,13 @@ export default class App extends Component {
     })
   }
   handleDelete = (id) => {
-      const filteredItems = this.state.items.filter(item => 
-        item.id !== id)
-
-        this.setState({
-          items : filteredItems
-        })
+    const filteredItems = this.state.items.filter(item =>
+      item.id !== id)
+      
+      this.setState({
+      items : filteredItems
+      })
+    //  console.log("heelo from delete", id)
   }
   handleEdit = (id) => {
     const filteredItems = this.state.items.filter(item => 
@@ -90,8 +90,6 @@ export default class App extends Component {
 
   }
 
-
-  
   render() {
     
     let filteredItems = this.state.items.filter((item) => {
@@ -106,12 +104,13 @@ export default class App extends Component {
             <Search 
               handleInput = {this.handleInput}/>
            
-            <TodoList items={this.state.items} 
-            data = {this.props.data}
+            <TodoList 
+            items={this.state.items} 
             clearList={this.clearList}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}
-            filteredItems = {filteredItems}/>
+            filteredItems = {filteredItems}
+            />
            
             <h3 className="text-capitalize text-center">
               todo input
